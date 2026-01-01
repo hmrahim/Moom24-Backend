@@ -11,6 +11,16 @@ const productSchema = new Schema(
       required: true,
       trim: true,
     },
+    minQty: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    unit: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     category: {
       type: String,
       required: true,

@@ -36,6 +36,10 @@ const cartSchema = new Schema(
       type: String,
       trim: true,
     },
+    minQty: {
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );
