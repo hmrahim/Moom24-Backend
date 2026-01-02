@@ -12,7 +12,7 @@ const productSchema = new Schema(
       trim: true,
     },
     minQty: {
-      type: String,
+      type: Number,
       required: true,
       trim: true,
     },

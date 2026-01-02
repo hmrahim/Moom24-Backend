@@ -37,6 +37,7 @@ const {
   productFindOneById,
   productDeleteController,
   productSeacrhController,
+  infinitScroll,
 } = require("../controllers/productController");
 const {
   getRiderController,
@@ -66,6 +67,7 @@ const userValidator = require("../validations/userValidation");
 // ==============public api===============
 router.get("/product", productGetController);
 router.get("/product/:id", productFindOneById);
+router.get("/infinite-scroll", infinitScroll);
 
 // ==================protected api===================
 router.post(
