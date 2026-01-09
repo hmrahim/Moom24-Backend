@@ -76,7 +76,7 @@ router.post(
   productValidation,
   productPostController
 );
-router.put("/product/:id", authMiddleware, productPutController);
+router.patch("/product/:id", authMiddleware, productPutController);
 router.delete("/product/:id", authMiddleware, productDeleteController);
 router.get("/search", authMiddleware, productSeacrhController);
 

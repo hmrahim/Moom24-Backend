@@ -21,8 +21,8 @@ exports.productPostController = async (req, res, next) => {
     const data = req.body;
     const product = new Product(data);
     await product.save();
-    
-  res.send({status:200});
+
+    res.send({ status: 200 });
   } catch (error) {
     res.send(error);
   }
@@ -34,18 +34,35 @@ exports.productFindOneById = async (req, res, next) => {
   res.send(product);
 };
 
+const removeEmptyFields = (obj) => {
+  const cleaned = {};
+
+  for (let key in obj) {
+    if (obj[key] !== "" && obj[key] !== null && obj[key] !== undefined) {
+      cleaned[key] = obj[key];
+    }
+  }
+
+  return cleaned;
+};
+
 exports.productPutController = async (req, res, next) => {
   const id = req.params.id;
   const product = req.body;
+ const update =  removeEmptyFields(product)
+
   try {
     const query = { _id: id };
     const docs = {
-      $set: product,
+      $set: update,
     };
     const result = await Product.findOneAndUpdate(query, docs, { new: true });
-    
+    console.log(product);
     res.send(result);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
 };
 exports.productDeleteController = async (req, res, next) => {
   const id = req.params.id;
@@ -67,20 +84,14 @@ exports.productSeacrhController = async (req, res, next) => {
       { discount: { $regex: text, $options: "i" } },
       { desc: { $regex: text, $options: "i" } },
       { country: { $regex: text, $options: "i" } },
-      
     ],
   });
 
-  
   res.send(data);
-
 };
 
-
-
-
 exports.infinitScroll = async (req, res, next) => {
- try {
+  try {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
     const skip = (page - 1) * limit;
@@ -90,13 +101,12 @@ exports.infinitScroll = async (req, res, next) => {
 
     res.status(200).json({
       data,
-      
+
       hasMore,
-      
     });
   } catch (error) {
     res.status(500).json({
-      error: error.message
+      error: error.message,
     });
   }
-}
+};

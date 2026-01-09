@@ -1,4 +1,15 @@
 const { Schema, model } = require("mongoose");
+
+
+const variantSchema = new Schema({
+  color: String,
+  size: String,
+  price: Number,
+  stock:Number,
+  images:String,
+
+  // id না দিলেও Mongoose _id দিবে automatically
+});
 const productSchema = new Schema(
   {
     name: {
@@ -49,7 +60,12 @@ const productSchema = new Schema(
       type: String,
       trim: true,
     },
+    variants: {
+      type: [variantSchema],
+      required: true,
+    },
   },
+
   { timestamps: true }
 );
 const Product = model("Product", productSchema);
