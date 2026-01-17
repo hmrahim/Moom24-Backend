@@ -22,11 +22,13 @@ const cartSchema = new Schema(
       trim: true,
     },
 
-    image: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    image: [
+      {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    ],
 
     discount: {
       type: String,
@@ -40,8 +42,16 @@ const cartSchema = new Schema(
       type: String,
       trim: true,
     },
+    size: {
+      type: String,
+      trim: true,
+    },
+    color: {
+      type: String,
+      trim: true,
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 const Cart = model("Cart", cartSchema);
 module.exports = Cart;

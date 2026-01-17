@@ -34,6 +34,10 @@ const confirmOrderSchema = new Schema(
       type: String,
       trim: true,
     },
+    tId: {
+      type: String,
+      trim: true,
+    },
     distence: {
       type: String,
       trim: true,

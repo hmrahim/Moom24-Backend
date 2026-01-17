@@ -1,12 +1,11 @@
 const { Schema, model } = require("mongoose");
 
-
 const variantSchema = new Schema({
   color: String,
   size: String,
   price: Number,
-  stock:Number,
-  images:String,
+  stock: Number,
+  images: String,
 
   // id না দিলেও Mongoose _id দিবে automatically
 });
@@ -42,11 +41,13 @@ const productSchema = new Schema(
       required: true,
       trim: true,
     },
-    image: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    image: [
+      {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    ],
     country: {
       type: String,
       required: true,

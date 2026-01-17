@@ -30,6 +30,7 @@ const {
   categoryPutController,
   categoryDeleteController,
 } = require("../controllers/CategoryController");
+const { paymentStripePostController } = require("../controllers/paymentController");
 const {
   productGetController,
   productPostController,
@@ -157,5 +158,8 @@ router.get("/promocode", authMiddleware, promocodeGetControllers);
 router.get("/promocode/:id", authMiddleware, getPromoByIdController);
 router.put("/promocode/:id", authMiddleware, promoPutController);
 router.delete("/promocode/:id", authMiddleware, deletePromo);
+
+// ==================payment initient api======================
+router.post("/create-payment-intent",paymentStripePostController)
 
 module.exports = router;
