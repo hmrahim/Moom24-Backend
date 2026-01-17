@@ -30,7 +30,7 @@ const {
   categoryPutController,
   categoryDeleteController,
 } = require("../controllers/CategoryController");
-const { paymentStripePostController } = require("../controllers/paymentController");
+
 const {
   productGetController,
   productPostController,
@@ -75,7 +75,7 @@ router.post(
   "/product",
   authMiddleware,
   productValidation,
-  productPostController
+  productPostController,
 );
 router.patch("/product/:id", authMiddleware, productPutController);
 router.delete("/product/:id", authMiddleware, productDeleteController);
@@ -86,7 +86,7 @@ router.post(
   "/category",
   authMiddleware,
   categoryValidator,
-  categoryPostController
+  categoryPostController,
 );
 router.get("/category", authMiddleware, categoryGetController);
 router.get("/category/:id", authMiddleware, categoryGetByIdController);
@@ -101,7 +101,7 @@ router.put("/user", userPutController);
 
 // =========================Cart======================
 router.post("/cart", authMiddleware, CartPostController);
-router.get("/cart/:email",authMiddleware, CartGetController);
+router.get("/cart/:email", authMiddleware, CartGetController);
 router.delete("/cart/:id", authMiddleware, CartDeleteController);
 router.put("/cart/:id", authMiddleware, CartUpdateController);
 router.post("/confirm-order", authMiddleware, postCustomarInfo);
@@ -114,18 +114,18 @@ router.get("/confirm-order", authMiddleware, getConfirmOrderController);
 router.get(
   "/confirm-order-by-id/:id",
   authMiddleware,
-  getConfirmOrderByIdController
+  getConfirmOrderByIdController,
 );
 
 router.get(
   "/confirm-order/customer/:email",
   authMiddleware,
-  getConfirmOrderByEmailController
+  getConfirmOrderByEmailController,
 );
 router.get(
   "/confirm-order/history/:email",
   authMiddleware,
-  geAlltConfirmOrderByEmailController
+  geAlltConfirmOrderByEmailController,
 );
 router.put("/confirm-order/:email", authMiddleware, confirmOrderController);
 router.put("/cancel-order/:id", cancelledOrderController);
@@ -136,7 +136,7 @@ router.get("/riders/:email", authMiddleware, getRiderByEmailController);
 router.get(
   "/riders/all-data/:email",
   authMiddleware,
-  getAllRidersDataController
+  getAllRidersDataController,
 );
 
 // ===================settings==========================
@@ -144,7 +144,7 @@ router.put(
   "/settings",
   authMiddleware,
   upload.single("image"),
-  settingsPostController
+  settingsPostController,
 );
 router.get("/settings", getSettingsData);
 
