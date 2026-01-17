@@ -160,6 +160,6 @@ router.put("/promocode/:id", authMiddleware, promoPutController);
 router.delete("/promocode/:id", authMiddleware, deletePromo);
 
 // ==================payment initient api======================
-router.post("/create-payment-intent",paymentStripePostController)
+// router.post("/create-payment-intent",paymentStripePostController)
 
 module.exports = router;
