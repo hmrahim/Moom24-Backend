@@ -21,7 +21,8 @@ exports.contactPostController = async (req, res, next) => {
         message,
       });
 
-      console.log(mail);
+      console.log(process.env.EMAIL_USER);
+      console.log(process.env.EMAIL_PASS);
 
     
     res.status(200).json({
