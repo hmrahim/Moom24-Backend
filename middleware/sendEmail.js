@@ -9,11 +9,8 @@ export const sendEmail = async ({ name, email, phone, message }) => {
     service: "gmail",
 
     auth: {
-      // আপনার gmail
       user: "hmrahimdb@gmail.com",
-
-      // gmail app password
-      pass: "lnrnqbbnahwfmyvb",
+      pass: "lnrnqbbnahwfmyvb ",
     },
   });
 
