@@ -13,7 +13,7 @@ export const sendEmail = async ({ name, email, phone, message }) => {
       user: process.env.USER,
 
       // gmail app password
-      pass: process.env.PASSWORD,
+      pass: process.env.USER_PASSWORD,
     },
   });
 
