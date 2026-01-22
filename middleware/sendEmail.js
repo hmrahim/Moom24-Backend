@@ -10,10 +10,10 @@ export const sendEmail = async ({ name, email, phone, message }) => {
 
     auth: {
       // আপনার gmail
-      user: process.env.EMAIL_USER,
+      user: "hmrahimdb@gmail.com",
 
       // gmail app password
-      pass: process.env.EMAIL_PASS,
+      pass: "lnrnqbbnahwfmyvb",
     },
   });
 
