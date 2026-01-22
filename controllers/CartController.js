@@ -382,12 +382,12 @@ exports.updateConfirmOrderStatus = async (req, res, next) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "hmrahimdb@gmail.com",
-          pass: "lnrnqbbnahwfmyvb ",
+          user: process.env.USER,
+          pass: process.env.PASSWORD,
         },
       });
       const mailOptions = {
-        from: `"HomeExpres" <hmrahimdb@gmail.com>`,
+        from: `"MOOM24.COM" <hmrahimdb@gmail.com>`,
         to: result.email,
         subject: `Order Confirmed! #${result.orderNo}`,
         html: html,

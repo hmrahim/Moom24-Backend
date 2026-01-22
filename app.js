@@ -26,8 +26,10 @@ const middleware = [
   express.urlencoded({ extended: true }),
   cors(),
 ];
+app.use(express.static("public"));
 app.use(middleware);
 app.use("/api", router);
+
 
 mongoose.connect(process.env.DB_URI).then(() => {
   console.log("database is connected");

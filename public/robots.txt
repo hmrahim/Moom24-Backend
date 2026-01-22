@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://moom24.com/sitemap.xml
