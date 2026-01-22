@@ -23,7 +23,7 @@ export const sendEmail = async ({ name, email, phone, message }) => {
     from: `"MOOM24.COM" <${email}>`,
 
     // আপনার email এ যাবে
-    to: process.env.USER,
+    to: process.env.EMAIL_USER,
 
     // subject
     subject: "📩 New Contact Message",

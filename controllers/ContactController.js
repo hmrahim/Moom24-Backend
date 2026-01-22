@@ -14,14 +14,14 @@ exports.contactPostController = async (req, res, next) => {
     });
     await result.save();
 
-    if (result) {
-      await sendEmail({
+   const mail =  await sendEmail({
         name,
         email,
         phone,
         message,
       });
-    }
+
+      console.log(mail);
 
     
     res.status(200).json({
@@ -31,6 +31,7 @@ exports.contactPostController = async (req, res, next) => {
 
     // সব ঠিক থাকলে success response
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       
       message: error.message,
