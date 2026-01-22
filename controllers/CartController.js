@@ -383,7 +383,7 @@ exports.updateConfirmOrderStatus = async (req, res, next) => {
         service: "gmail",
         auth: {
           user: process.env.USER,
-          pass: process.env.PASSWORD,
+          pass: process.env.USER_PASSWORD,
         },
       });
       const mailOptions = {

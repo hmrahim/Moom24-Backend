@@ -23,7 +23,7 @@ exports.contactPostController = async (req, res, next) => {
       });
     }
 
-    console.log(result);
+    
     res.status(200).json({
       success: true,
       message: "Message sent successfully",
