@@ -6,26 +6,25 @@ export const sendEmail = async ({ name, email, phone, message }) => {
   // transporter = email পাঠানোর মাধ্যম
   const transporter = nodemailer.createTransport({
     // gmail ব্যবহার করছি
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     service: "gmail",
-
     auth: {
-      user: "hmrahimdb@gmail.com",
-      pass: "lnrnqbbnahwfmyvb ",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+    tls: {
+      ciphers: "SSLv3",
     },
   });
 
-  // আসল email পাঠানো হচ্ছে এখানে
   return await transporter.sendMail({
-    // customer এর email থেকে আসছে
     from: `"MOOM24.COM" <${email}>`,
-
-    // আপনার email এ যাবে
     to: "hmrahimdb@gmail.com",
 
-    // subject
     subject: "📩 New Contact Message",
 
-    // email body (HTML)
     html: `
      <div style="
   max-width: 650px;
