@@ -30,7 +30,7 @@ const {
   categoryPutController,
   categoryDeleteController,
 } = require("../controllers/CategoryController");
-const { contactPostController } = require("../controllers/ContactController");
+const { contactPostController, getEmailsController, getEmailsById, sendEmailController } = require("../controllers/ContactController");
 
 const {
   productGetController,
@@ -162,6 +162,9 @@ router.delete("/promocode/:id", authMiddleware, deletePromo);
 
 // ===================contact=========================
 router.post("/contact",contactPostController)
+router.get("/emails",getEmailsController)
+router.get("/emails/:id",getEmailsById)
+router.post("/send-emails",sendEmailController)
 
 // ==================payment initient api======================
 // router.post("/create-payment-intent",paymentStripePostController)

@@ -84,9 +84,129 @@ exports.contactPostController = async (req, res, next) => {
 
     // সব ঠিক থাকলে success response
   } catch (error) {
-    
     res.status(400).json({
       message: error.message,
     });
+  }
+};
+
+exports.getEmailsController = async (req, res, next) => {
+  const emails = await Contact.find().sort({ _id: -1 });
+  res.status(200).json(emails);
+};
+
+exports.getEmailsById = async (req, res, next) => {
+  const id = req.params.id;
+  const emails = await Contact.findById({ _id: id });
+
+  res.status(200).json(emails);
+};
+
+exports.sendEmailController = async (req, res, next) => {
+  const { email, subject, message } = req.body;
+  const templete = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Template</title>
+  <style>
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .email-header {
+      background-color: #1d4ed8; 
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .email-body {
+      padding: 20px;
+      color: #333333;
+    }
+    .email-body h2 {
+      margin-top: 0;
+      color: #1d4ed8;
+    }
+    .email-footer {
+      background-color: #f3f4f6; 
+      color: #666666;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .email-section {
+      margin-bottom: 15px;
+    }
+    .label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+    @media screen and (max-width: 600px) {
+      .email-container {
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    
+    <div class="email-header">
+      MOOM24
+    </div>
+
+   
+    <div class="email-body">
+      <div class="email-section">
+        <span class="label">From:</span>
+        <span>moom24.com</span>
+      </div>
+      <div class="email-section">
+        <span class="label">Subject:</span>
+        <span>Re: ${subject}</span>
+      </div>
+      <div class="email-section">
+        <span class="label">Message:</span>
+        <p>${message}</p>
+      </div>
+    </div>
+
+   
+    <div class="email-footer">
+      &copy; 2026 MOOM24. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
+`;
+  try {
+    await sendEmail({
+      to: email,
+      subject: subject,
+      html: templete,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Message sent successfully",
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

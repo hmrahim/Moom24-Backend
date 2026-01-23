@@ -39,7 +39,7 @@ try {
   };
 
   await sgMail.send(msg);
- 
+  console.log("✅ Email sent");
   
 } catch (error) {
   
