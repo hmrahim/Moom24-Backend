@@ -1,4 +1,4 @@
-const Banner = require("../models/banner");
+const Banner = require("../models/Banner");
 
 exports.postBannerController = async (req, res, next) => {
   const { image, title, desc } = req.body;
