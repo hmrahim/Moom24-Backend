@@ -5,6 +5,10 @@ const categorySchema = new Schema({
     required: true,
     trim:true
   },
+  image:{
+    type:String,
+    trim:true
+  }
 });
 
 const Category = model("Category",categorySchema)

@@ -196,11 +196,12 @@ exports.sendEmailController = async (req, res, next) => {
 </html>
 `;
   try {
-    await sendEmail({
+ const result =   await sendEmail({
       to: email,
       subject: subject,
       html: templete,
     });
+console.log(result);
 
     res.status(200).json({
       success: true,

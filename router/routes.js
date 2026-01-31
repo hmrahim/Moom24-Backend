@@ -1,5 +1,12 @@
 const router = require("express").Router();
 const {
+  postBannerController,
+  getAllBanners,
+  getBannerById,
+  updateBannerController,
+  deleteBannerController,
+} = require("../controllers/BannerController");
+const {
   CartPostController,
   CartGetController,
   CartDeleteController,
@@ -30,7 +37,12 @@ const {
   categoryPutController,
   categoryDeleteController,
 } = require("../controllers/CategoryController");
-const { contactPostController, getEmailsController, getEmailsById, sendEmailController } = require("../controllers/ContactController");
+const {
+  contactPostController,
+  getEmailsController,
+  getEmailsById,
+  sendEmailController,
+} = require("../controllers/ContactController");
 
 const {
   productGetController,
@@ -161,10 +173,17 @@ router.put("/promocode/:id", authMiddleware, promoPutController);
 router.delete("/promocode/:id", authMiddleware, deletePromo);
 
 // ===================contact=========================
-router.post("/contact",contactPostController)
-router.get("/emails",getEmailsController)
-router.get("/emails/:id",getEmailsById)
-router.post("/send-emails",sendEmailController)
+router.post("/contact", contactPostController);
+router.get("/emails", getEmailsController);
+router.get("/emails/:id", getEmailsById);
+router.post("/send-emails", sendEmailController);
+
+// banner routes ===========
+router.post("/add-banner", authMiddleware, postBannerController);
+router.get("/all-banner", getAllBanners);
+router.get("/all-banner/:id", getBannerById);
+router.put("/update-banner/:id", authMiddleware, updateBannerController);
+router.delete("/delete-banner/:id", authMiddleware, deleteBannerController);
 
 // ==================payment initient api======================
 // router.post("/create-payment-intent",paymentStripePostController)
