@@ -26,13 +26,13 @@ app.get("/", (req, res) => {
 
 app.get("/google-feed.xml", async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().sort({ _id: -1 });
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-<title>My Store</title>
-<link>https://yourwebsite.com</link>
+<title>moom24</title>
+<link>https://moom24.com</link>
 <description>Google Product Feed</description>
 `;
 
