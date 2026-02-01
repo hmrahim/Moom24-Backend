@@ -35,4 +35,21 @@ exports.userPostController = async (req, res, next) => {
     res.send(user);
   } catch (error) {}
 };
+
+exports.roleUpdateController = async (req, res, next) => {
+  const { rol ,email} = req.body;
+
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { email: email },
+      { rol: rol },
+      { new: true }
+    );
+    console.log(user)
+    res.send(user);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
 exports.userPutController = (req, res, next) => {};
