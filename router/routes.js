@@ -43,6 +43,7 @@ const {
   getEmailsById,
   sendEmailController,
 } = require("../controllers/ContactController");
+const { generateGoogleFeed } = require("../controllers/googleFeedController");
 
 const {
   productGetController,
@@ -187,5 +188,6 @@ router.delete("/delete-banner/:id", authMiddleware, deleteBannerController);
 
 // ==================payment initient api======================
 // router.post("/create-payment-intent",paymentStripePostController)
+// router.get("/google-feed.xml", generateGoogleFeed);
 
 module.exports = router;

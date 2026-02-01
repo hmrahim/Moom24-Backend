@@ -7,6 +7,8 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const router = require("./router/routes");
 const admin = require("firebase-admin");
+const Product = require("./models/Product");
+const xmlbuilder = require("xmlbuilder");
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -21,6 +23,46 @@ if (!admin.apps.length) {
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.get("/google-feed.xml", async (req, res) => {
+  try {
+    const products = await Product.find();
+
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>My Store</title>
+<link>https://yourwebsite.com</link>
+<description>Google Product Feed</description>
+`;
+
+    products.forEach((p) => {
+      xml += `
+<item>
+<id>${p._id}</id>
+<title><![CDATA[${p.name}]]></title>
+<description><![CDATA[${p.desc || "No description"}]]></description>
+<link>https://moom24.com/product-details/${p._id}</link>
+<image_link>${p.image}</image_link>
+<price>${p.price} sar</price>
+<availability>in stock</availability>
+<condition>new</condition>
+</item>
+`;
+    });
+
+    xml += `
+</channel>
+</rss>`;
+
+    res.set("Content-Type", "application/xml");
+    res.send(xml);
+  } catch (error) {
+    console.log("FEED ERROR => ", error);
+    res.status(500).send("Feed Error");
+  }
+});
+
 const middleware = [
   express.json(),
   express.urlencoded({ extended: true }),
@@ -29,7 +71,6 @@ const middleware = [
 app.use(express.static("public"));
 app.use(middleware);
 app.use("/api", router);
-
 
 mongoose.connect(process.env.DB_URI).then(() => {
   console.log("database is connected");
