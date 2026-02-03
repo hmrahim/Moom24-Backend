@@ -44,6 +44,13 @@ const {
   sendEmailController,
 } = require("../controllers/ContactController");
 const { generateGoogleFeed } = require("../controllers/googleFeedController");
+const {
+  marqueeGetController,
+  marqueeGetControllerById,
+  marqueePostController,
+  marqueePutController,
+  marqueeDeleteController,
+} = require("../controllers/marqueeController");
 
 const {
   productGetController,
@@ -188,6 +195,12 @@ router.get("/all-banner/:id", getBannerById);
 router.put("/update-banner/:id", authMiddleware, updateBannerController);
 router.delete("/delete-banner/:id", authMiddleware, deleteBannerController);
 
+// =================marquee routes======================
+router.get("/marquee", marqueeGetController);
+router.get("/marquee/:id", marqueeGetControllerById);
+router.post("/marquee", authMiddleware, marqueePostController);
+router.put("/marquee/:id", authMiddleware, marqueePutController);
+router.delete("/marquee/:id", authMiddleware, marqueeDeleteController);
 // ==================payment initient api======================
 // router.post("/create-payment-intent",paymentStripePostController)
 // router.get("/google-feed.xml", generateGoogleFeed);
