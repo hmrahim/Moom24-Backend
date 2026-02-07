@@ -155,6 +155,34 @@ exports.postCustomarInfo = async (req, res) => {
   }
 };
 
+
+
+exports.updateLocation = async (req,res)=> {
+const items  = req.body
+const email = req.params.email
+ const address = {
+    name:items.name,
+    phone: items.phone,
+    road: items.address.road,
+    suburb: items.address.suburb,
+    city: items.address.city,
+    province: items.address.province,
+    state: items.address.state,
+    postcode: items.address.postcode,
+    country: items.address.country,
+    country_code: items.address.country_code,
+    customAddress: items.customAddress,
+    location: items.location,
+  };
+
+  const query = {email:email, status:"unconfirmed"}
+  const result = await ConfirmOrder.findOneAndUpdate(query, {$set:{address:address}}, {new:true})
+  
+  res.status(200).json(result)
+
+
+}
+
 exports.getDistanceController = async (req, res, next) => {
   const email = req.params.email;
 

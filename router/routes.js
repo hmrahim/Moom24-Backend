@@ -29,6 +29,7 @@ const {
   promoPutController,
   deletePromo,
   getDistanceController,
+  updateLocation,
 } = require("../controllers/CartController");
 const {
   categoryGetController,
@@ -81,6 +82,7 @@ const {
 const {
   visitorsPostController,
   visitorsGetController,
+  getCurrentLocation,
 } = require("../controllers/VisitorsController");
 const { authMiddleware } = require("../middleware/authMiddleware");
 const upload = require("../middleware/multer");
@@ -129,6 +131,7 @@ router.delete("/cart/:id", authMiddleware, CartDeleteController);
 router.put("/cart/:id", authMiddleware, CartUpdateController);
 router.post("/confirm-order", authMiddleware, postCustomarInfo);
 router.get("/distence-customer/:email", authMiddleware, getDistanceController);
+router.patch("/update-location/:email", authMiddleware, updateLocation);
 
 //============== confrim order route==========
 router.get("/confirm-order/:email", authMiddleware, getunConfirmedOrderByEmail);
@@ -201,6 +204,9 @@ router.get("/marquee/:id", marqueeGetControllerById);
 router.post("/marquee", authMiddleware, marqueePostController);
 router.put("/marquee/:id", authMiddleware, marqueePutController);
 router.delete("/marquee/:id", authMiddleware, marqueeDeleteController);
+
+router.get("/location", getCurrentLocation);
+
 // ==================payment initient api======================
 // router.post("/create-payment-intent",paymentStripePostController)
 // router.get("/google-feed.xml", generateGoogleFeed);

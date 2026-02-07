@@ -9,7 +9,7 @@ exports.visitorsPostController = async (req, res, next) => {
 
   try {
     const response = await axios.get(
-      `https://ipinfo.io/${ip}?token=${process.env.API_INFO}`
+      `https://ipinfo.io/${ip}?token=${process.env.API_INFO}`,
     );
 
     const visitorData = {
@@ -44,5 +44,23 @@ exports.visitorsGetController = async (req, res, next) => {
     res.send(result);
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
+  }
+};
+
+exports.getCurrentLocation = async (req, res, next) => {
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  try {
+    const response = await axios.get(
+      `https://ipinfo.io/${ip}?token=${process.env.API_INFO}`,
+    );
+
+    const visitorData = {
+      ip: ip,
+      location: response.data,
+    };
+
+    return res.json(visitorData);
+  } catch (error) {
+    return res.json({ error: "Location fetch failed" }, { status: 500 });
   }
 };
