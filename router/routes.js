@@ -83,6 +83,8 @@ const {
   visitorsPostController,
   visitorsGetController,
   getCurrentLocation,
+  getMonthlyVisitors,
+  getMonthlyOrderStatus,
 } = require("../controllers/VisitorsController");
 const { authMiddleware } = require("../middleware/authMiddleware");
 const upload = require("../middleware/multer");
@@ -156,6 +158,11 @@ router.get(
 router.put("/confirm-order/:email", authMiddleware, confirmOrderController);
 router.put("/cancel-order/:id", cancelledOrderController);
 router.patch("/update-confirm-order/:id", updateConfirmOrderStatus);
+
+
+router.get("/monthly-confirm-order", getMonthlyOrderStatus);
+
+
 // ================rider routes ==============
 router.get("/riders", authMiddleware, getRiderController);
 router.get("/riders/:email", authMiddleware, getRiderByEmailController);
@@ -177,6 +184,7 @@ router.get("/settings", getSettingsData);
 // ======================================visitors========================
 router.post("/visitors", visitorsPostController);
 router.get("/visitors", authMiddleware, visitorsGetController);
+router.get("/visitors/monthly", getMonthlyVisitors);
 
 // ===============================Promocode controllers ===============================
 router.post("/promocode", authMiddleware, promocodePostController);
