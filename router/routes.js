@@ -62,6 +62,7 @@ const {
   productSeacrhController,
   infinitScroll,
 } = require("../controllers/productController");
+const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail } = require("../controllers/quotationController");
 const {
   getRiderController,
   getRiderByEmailController,
@@ -212,6 +213,14 @@ router.get("/marquee/:id", marqueeGetControllerById);
 router.post("/marquee", authMiddleware, marqueePostController);
 router.put("/marquee/:id", authMiddleware, marqueePutController);
 router.delete("/marquee/:id", authMiddleware, marqueeDeleteController);
+
+// =====================quotation=======================
+router.post("/quotation",authMiddleware,quotationPostController)
+router.get("/quotation",authMiddleware,quotationGetController)
+router.get("/quotation/:id",authMiddleware,getQuotationByid)
+router.get("/quotation-email/:email",authMiddleware,getQuotationByEmail)
+router.get("/quotation-all-email/:email",getAllQuotationByEmail)
+router.put("/quotation/:id/product",quotationPutController)
 
 router.get("/location", getCurrentLocation);
 
