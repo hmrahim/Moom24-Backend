@@ -52,6 +52,7 @@ const {
   marqueePutController,
   marqueeDeleteController,
 } = require("../controllers/marqueeController");
+const { offerPostController, offerDeleteController, offerPutController, getAllOffersController, getActiveOffer } = require("../controllers/offerController");
 
 const {
   productGetController,
@@ -62,7 +63,7 @@ const {
   productSeacrhController,
   infinitScroll,
 } = require("../controllers/productController");
-const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail } = require("../controllers/quotationController");
+const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail, getInvoicePdf } = require("../controllers/quotationController");
 const {
   getRiderController,
   getRiderByEmailController,
@@ -221,6 +222,23 @@ router.get("/quotation/:id",authMiddleware,getQuotationByid)
 router.get("/quotation-email/:email",authMiddleware,getQuotationByEmail)
 router.get("/quotation-all-email/:email",getAllQuotationByEmail)
 router.put("/quotation/:id/product",quotationPutController)
+
+// =================offer =======================
+
+router.get("/all-offer",getAllOffersController)
+router.post("/create-offer",offerPostController)
+router.delete("/delete-offer/:id",offerDeleteController)
+router.put("/update-offer/:id",offerPutController)
+
+router.get("/active-offer",getActiveOffer)
+
+
+
+
+
+
+
+router.get("/quotation-pdf/:id", getInvoicePdf);
 
 router.get("/location", getCurrentLocation);
 
