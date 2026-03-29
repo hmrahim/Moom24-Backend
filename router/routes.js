@@ -62,6 +62,7 @@ const {
   productDeleteController,
   productSeacrhController,
   infinitScroll,
+  getProductBycategoryForHome,
 } = require("../controllers/productController");
 const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail, getInvoicePdf } = require("../controllers/quotationController");
 const {
@@ -96,6 +97,7 @@ const userValidator = require("../validations/userValidation");
 // ==============public api===============
 router.get("/product", productGetController);
 router.get("/product/:id", productFindOneById);
+router.get("/product/category/:category", getProductBycategoryForHome);
 router.get("/infinite-scroll", infinitScroll);
 
 // ==================protected api===================
@@ -116,7 +118,7 @@ router.post(
   categoryValidator,
   categoryPostController,
 );
-router.get("/category", authMiddleware, categoryGetController);
+router.get("/category", categoryGetController);
 router.get("/category/:id", authMiddleware, categoryGetByIdController);
 router.put("/category/:id", authMiddleware, categoryPutController);
 router.delete("/category/:id", authMiddleware, categoryDeleteController);

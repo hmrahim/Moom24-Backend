@@ -110,3 +110,15 @@ exports.infinitScroll = async (req, res, next) => {
     });
   }
 };
+
+
+exports.getProductBycategoryForHome = async(req,res,next)=> {
+  const category = req.params.category
+  try {
+    const products = await Product.find({category:category})
+    res.send(products)
+    
+  } catch (error) {
+    
+  }
+}
