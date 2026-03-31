@@ -119,7 +119,7 @@ router.post(
   categoryPostController,
 );
 router.get("/category", categoryGetController);
-router.get("/category/:id", authMiddleware, categoryGetByIdController);
+router.get("/category/:id", categoryGetByIdController);
 router.put("/category/:id", authMiddleware, categoryPutController);
 router.delete("/category/:id", authMiddleware, categoryDeleteController);
 
