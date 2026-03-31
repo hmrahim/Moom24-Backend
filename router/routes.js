@@ -64,7 +64,7 @@ const {
   infinitScroll,
   getProductBycategoryForHome,
 } = require("../controllers/productController");
-const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail, getInvoicePdf } = require("../controllers/quotationController");
+const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail } = require("../controllers/quotationController");
 const {
   getRiderController,
   getRiderByEmailController,
@@ -240,7 +240,7 @@ router.get("/active-offer",getActiveOffer)
 
 
 
-router.get("/quotation-pdf/:id", getInvoicePdf);
+// router.get("/quotation-pdf/:id", getInvoicePdf);
 
 router.get("/location", getCurrentLocation);
 
