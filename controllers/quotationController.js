@@ -1,7 +1,5 @@
 const Quotation = require("../models/Quotation");
-const puppeteer = require("puppeteer");
-const fs = require("fs");
-const path = require("path");
+
 
 
 exports.quotationPostController = (req, res, next) => {
@@ -94,57 +92,57 @@ exports.getAllQuotationByEmail =async (req,res,next)=> {
 }
 
 
-exports.getInvoicePdf = async (req, res, next) => {
-  const id = req.params.id;
-  try {
-  const browser = await puppeteer.launch({
-    headless: "new",
-  });
+// exports.getInvoicePdf = async (req, res, next) => {
+//   const id = req.params.id;
+//   try {
+//   const browser = await puppeteer.launch({
+//     headless: "new",
+//   });
 
-    const page = await browser.newPage();
-      await page.setViewport({
-    width: 1920,
-    height: 1080,
-    deviceScaleFactor: 2, // Important for high quality
-  });
-const htmlContent = `
-    <html>
-      <head>
-        <style>
-          body { font-family: Arial; padding: 40px; }
-          h1 { color: #111; font-size: 32px; }
-        </style>
-      </head>
-      <body>
-        <h1>Invoice PDF</h1>
-        <p>This is high quality PDF from backend</p>
-      </body>
-    </html>
-  `;
+//     const page = await browser.newPage();
+//       await page.setViewport({
+//     width: 1920,
+//     height: 1080,
+//     deviceScaleFactor: 2, // Important for high quality
+//   });
+// const htmlContent = `
+//     <html>
+//       <head>
+//         <style>
+//           body { font-family: Arial; padding: 40px; }
+//           h1 { color: #111; font-size: 32px; }
+//         </style>
+//       </head>
+//       <body>
+//         <h1>Invoice PDF</h1>
+//         <p>This is high quality PDF from backend</p>
+//       </body>
+//     </html>
+//   `;
 
-   await page.setContent(htmlContent, { waitUntil: "networkidle0" });
+//    await page.setContent(htmlContent, { waitUntil: "networkidle0" });
 
-  const pdfBuffer = await page.pdf({
-    format: "A4",
-    printBackground: true,
-    preferCSSPageSize: true,
-    scale: 1,
-  })
+//   const pdfBuffer = await page.pdf({
+//     format: "A4",
+//     printBackground: true,
+//     preferCSSPageSize: true,
+//     scale: 1,
+//   })
 
-    await browser.close();
+//     await browser.close();
 
-  res.set({
-    "Content-Type": "application/pdf",
-    "Content-Length": pdfBuffer.length,
-  });
+//   res.set({
+//     "Content-Type": "application/pdf",
+//     "Content-Length": pdfBuffer.length,
+//   });
 
-  res.send(pdfBuffer);
+//   res.send(pdfBuffer);
 
-  }
-    catch (error) { 
-      res.status(500).json({
-        message: "Something went wrong",
-        error: error.message,
-      });
-    }
-};
+//   }
+//     catch (error) { 
+//       res.status(500).json({
+//         message: "Something went wrong",
+//         error: error.message,
+//       });
+//     }
+// };
