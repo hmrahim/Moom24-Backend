@@ -218,21 +218,21 @@ router.put("/marquee/:id", authMiddleware, marqueePutController);
 router.delete("/marquee/:id", authMiddleware, marqueeDeleteController);
 
 // =====================quotation=======================
-router.post("/quotation",authMiddleware,quotationPostController)
-router.get("/quotation",authMiddleware,quotationGetController)
-router.get("/quotation/:id",authMiddleware,getQuotationByid)
-router.get("/quotation-email/:email",authMiddleware,getQuotationByEmail)
-router.get("/quotation-all-email/:email",getAllQuotationByEmail)
-router.put("/quotation/:id/product",quotationPutController)
+router.post("/quotation", authMiddleware, quotationPostController)
+router.get("/quotation", authMiddleware, quotationGetController)
+router.get("/quotation/:id", authMiddleware, getQuotationByid)
+router.get("/quotation-email/:email", authMiddleware, getQuotationByEmail)
+router.get("/quotation-all-email/:email", getAllQuotationByEmail)
+router.put("/quotation/:id/product", quotationPutController)
 
 // =================offer =======================
 
-router.get("/all-offer",getAllOffersController)
-router.post("/create-offer",offerPostController)
-router.delete("/delete-offer/:id",offerDeleteController)
-router.put("/update-offer/:id",offerPutController)
+router.get("/all-offer", getAllOffersController)
+router.post("/create-offer", offerPostController)
+router.delete("/delete-offer/:id", offerDeleteController)
+router.put("/update-offer/:id", offerPutController)
 
-router.get("/active-offer",getActiveOffer)
+router.get("/active-offer", getActiveOffer)
 
 
 
