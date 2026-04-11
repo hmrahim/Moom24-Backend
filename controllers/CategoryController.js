@@ -34,10 +34,11 @@ exports.categoryPostController = async (req, res, next) => {
 exports.categoryPutController = async (req, res, next) => {
   const id = req.params.id;
   const  data  = req.body;
+  console.log(data);
   try {
     const query = { _id: id };
     const docs = {
-      $set: { name:data.name},
+      $set: { name:data.name,image:data.image},
     };
     const result = await Category.findByIdAndUpdate(query, docs, { new: true });
   
