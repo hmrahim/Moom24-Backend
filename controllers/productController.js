@@ -49,12 +49,13 @@ const removeEmptyFields = (obj) => {
 exports.productPutController = async (req, res, next) => {
   const id = req.params.id;
   const product = req.body;
- const update =  removeEmptyFields(product)
+
+ console.log(product);
 
   try {
     const query = { _id: id };
     const docs = {
-      $set: update,
+      $set: product,
     };
     const result = await Product.findOneAndUpdate(query, docs, { new: true });
     console.log(product);
