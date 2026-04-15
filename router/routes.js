@@ -81,6 +81,7 @@ const {
   userPutController,
   userGetControllerBYEmail,
   roleUpdateController,
+  userDeleteController,
 } = require("../controllers/UserController");
 const {
   visitorsPostController,
@@ -129,6 +130,7 @@ router.get("/user/:email", userGetControllerBYEmail);
 router.post("/user", userValidator, userPostController);
 router.put("/user", userPutController);
 router.put("/user/role", authMiddleware, roleUpdateController);
+router.delete("/user/:id", authMiddleware, userDeleteController);
 
 // =========================Cart======================
 router.post("/cart", authMiddleware, CartPostController);

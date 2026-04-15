@@ -7,11 +7,11 @@ exports.userGetController = async (req, res, next) => {
   res.send(user);
 };
 
-exports.userGetControllerBYEmail = async(req, res) => {
+exports.userGetControllerBYEmail = async (req, res) => {
   const email = req.params.email;
-  const user = await User.findOne({email:email})
+  const user = await User.findOne({ email: email })
   res.send(user)
-  
+
 };
 exports.userPostController = async (req, res, next) => {
   const { name, email } = req.body;
@@ -21,7 +21,7 @@ exports.userPostController = async (req, res, next) => {
     rol: "user",
     image: "",
   };
- 
+
   const error = validationResult(req).formatWith(errorFormatter);
   if (!error.isEmpty()) {
     const err = error.mapped();
@@ -31,13 +31,13 @@ exports.userPostController = async (req, res, next) => {
   try {
     const user = new User(dataData);
     await user.save();
-    
+
     res.send(user);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 exports.roleUpdateController = async (req, res, next) => {
-  const { rol ,email} = req.body;
+  const { rol, email } = req.body;
 
 
   try {
@@ -52,4 +52,17 @@ exports.roleUpdateController = async (req, res, next) => {
     res.status(500).send(error.message);
   }
 };
-exports.userPutController = (req, res, next) => {};
+exports.userPutController = (req, res, next) => { };
+
+exports.userDeleteController = async (req, res, next) => {
+  const id = req.params.id
+ 
+  try {
+    const deletedUser = await User.findByIdAndDelete({ _id: id })
+    res.status(200).json(deletedUser)
+
+  } catch (error) {
+    res.status(400).json(error.message)
+
+  }
+}
