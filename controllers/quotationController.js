@@ -1,4 +1,5 @@
 const Quotation = require("../models/Quotation");
+const QuotProducts = require("../models/QuotProducts");
 // const puppeteer = require("puppeteer");
 // const fs = require("fs");
 // const path = require("path");
@@ -13,7 +14,7 @@ exports.quotationPostController = (req, res, next) => {
 
     result.save();
     res.status(200).json(result);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 exports.quotationGetController = async (req, res, next) => {
@@ -64,7 +65,7 @@ exports.quotationPutController = async (req, res, next) => {
     });
 
     console.log(quotation);
-   
+
   } catch (error) {
     res.status(500).json({
       message: "Something went wrong",
@@ -74,22 +75,39 @@ exports.quotationPutController = async (req, res, next) => {
 };
 
 
-exports.getAllQuotationByEmail =async (req,res,next)=> {
+exports.getAllQuotationByEmail = async (req, res, next) => {
   const email = req.params.email;
-   console.log(email);
- try {
-  const data = await Quotation.find({ email: email });
-  console.log(data);
-  res.status(200).json(data);
-  
- } catch (error) {
-  res.status(500).json({
-    message: "Something went wrong",
-    error: error.message,
-  });
+  console.log(email);
+  try {
+    const data = await Quotation.find({ email: email });
+    console.log(data);
+    res.status(200).json(data);
 
-  
- }
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
+
+
+  }
+
+}
+
+
+exports.getAllQuotProduct = async (req, res, next) => {
+  try {
+    const quotProduct = await QuotProducts.find()
+    res.status(200).json(quotProduct);
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
+
+
+  }
 
 }
 
@@ -141,7 +159,7 @@ exports.getAllQuotationByEmail =async (req,res,next)=> {
 //   res.send(pdfBuffer);
 
 //   }
-//     catch (error) { 
+//     catch (error) {
 //       res.status(500).json({
 //         message: "Something went wrong",
 //         error: error.message,

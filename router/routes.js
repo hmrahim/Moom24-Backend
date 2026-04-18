@@ -64,7 +64,7 @@ const {
   infinitScroll,
   getProductBycategoryForHome,
 } = require("../controllers/productController");
-const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail } = require("../controllers/quotationController");
+const { quotationPostController, quotationGetController, getQuotationByid, quotationPutController, getQuotationByEmail, getAllQuotationByEmail, getAllQuotProduct } = require("../controllers/quotationController");
 const {
   getRiderController,
   getRiderByEmailController,
@@ -82,6 +82,8 @@ const {
   userGetControllerBYEmail,
   roleUpdateController,
   userDeleteController,
+  updateProfileController,
+  getProfileDataController,
 } = require("../controllers/UserController");
 const {
   visitorsPostController,
@@ -226,6 +228,12 @@ router.get("/quotation/:id", authMiddleware, getQuotationByid)
 router.get("/quotation-email/:email", authMiddleware, getQuotationByEmail)
 router.get("/quotation-all-email/:email", getAllQuotationByEmail)
 router.put("/quotation/:id/product", quotationPutController)
+
+router.get("/quotationProduct", getAllQuotProduct)
+
+router.patch("/update-profile/:email",authMiddleware,updateProfileController)
+router.get("/update-profile/:email",authMiddleware,getProfileDataController)
+
 
 // =================offer =======================
 

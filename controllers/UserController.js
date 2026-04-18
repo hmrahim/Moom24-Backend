@@ -56,13 +56,67 @@ exports.userPutController = (req, res, next) => { };
 
 exports.userDeleteController = async (req, res, next) => {
   const id = req.params.id
- 
+
   try {
     const deletedUser = await User.findByIdAndDelete({ _id: id })
     res.status(200).json(deletedUser)
 
   } catch (error) {
     res.status(400).json(error.message)
+
+  }
+}
+
+exports.updateProfileController = async (req, res, next) => {
+  const data = req.body
+  const email = req.params.email
+  console.log(email);
+  try {
+    const profileData = {
+      name: data.name,
+      email: data.email,
+      title: data.role,
+      phone: data.phone,
+      location: data.location,
+
+      skills: data.skills,
+      bio: data.bio,
+      image: data.profileImage
+    };
+
+    const query = { email: email };
+
+    const result = await User.findOneAndUpdate(
+      query,
+      profileData,
+      {
+        new: true,
+        upsert: true,
+      }
+    );
+  
+
+    return res.status(200).send(result);
+
+  } catch (error) {
+    return res.status(400).send(error.message);
+
+  }
+
+}
+
+
+exports.getProfileDataController = async(req, res, next) => {
+  const email = req.params.email
+
+  try {
+    const result = await User.findOne({email:email})
+    return res.status(200).send(result);
+
+
+
+  } catch (error) {
+    return res.status(400).send(error.message);
 
   }
 }

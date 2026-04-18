@@ -6,12 +6,37 @@ const useerSchema = new Schema({
     required: true,
     trim: true,
   },
+  title: {
+    type: String,
+
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
     trim: true,
   },
+  phone: {
+    type: String,
+
+    trim: true,
+  },
   rol: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  location: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  skills: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  bio: {
     type: String,
     required: true,
     trim: true,
@@ -20,13 +45,13 @@ const useerSchema = new Schema({
     type: String,
     trim: true,
   },
-  orders:[
+  orders: [
     {
       type: mongoose.Types.ObjectId,
-      ref:"ConfirmOrder"
+      ref: "ConfirmOrder"
     }
   ]
 });
 
-const User = model("User",useerSchema)
+const User = model("User", useerSchema)
 module.exports = User
